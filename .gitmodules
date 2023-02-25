@@ -1,0 +1,3 @@
+[submodule "./src/games/memory_game"]
+    path = ./src/games/memory_game
+    url = https://github.com/bencot234/memory-game.git
