@@ -1,0 +1,121 @@
+.title {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.btn {
+  padding: 1rem;
+  background-color: #21b5ae;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  border-radius: 1rem;
+  border: none;
+  transition: 0.5s;
+  cursor: pointer;
+  margin: 0.3rem;
+}
+
+.btn:hover {
+  background-color: #de4151;
+  transition: 0.5s;
+}
+
+
+.show {
+  display: inline-block;
+}
+
+.hide {
+  display: none;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.cards-container {
+  margin: 1rem;
+}
+
+
+
+main {
+  text-align: center;
+  position: relative;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.game-over {
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 2rem;
+  font-size: x-large;
+  text-transform: capitalize;
+  height: 250px;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.top-score, .points {
+  position: absolute;
+  font-size: small;
+  text-transform: uppercase;
+  background-color: #21b564;
+  width: 7rem;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  top: 25px;
+  left: 0;
+}
+
+.points {
+  background-color: #2172b5;
+  top: 65px;
+}
+
+.begin-btn {
+  background-color: #de4151;
+  transition: 0.5s;
+}
+
+.begin-btn:hover {
+  background-color: #21b5ae;
+  transition: 0.5s;
+}
+
+
+@media (min-width: 600px) {
+  .cards-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .game-over {
+    top: 53%;
+  }
+
+  .top-score,
+  .points {
+    border-radius: 0px;
+  }
+  .points {
+    top: 40px;
+  }
+  .top-score {
+    top: 0
+  }
+}
