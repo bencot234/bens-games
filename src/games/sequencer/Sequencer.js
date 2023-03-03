@@ -21,6 +21,9 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [best, setBest] = useState(getBest());
   const [allowReset, setAllowReset] = useState(true);
+  const [speed, setSpeed] = useState(1000);
+  const [delay, setDelay] = useState(500);
+  const [clickDisabled, setClickDisabled] = useState(false);
 
   const turnOnLight = (index) => {
     const newLights = [...lights];
@@ -30,7 +33,7 @@ function App() {
       const newerLights = [...lights];
       newerLights[index].on = false;
       setLights(newerLights)
-    }, getDelay());
+    }, delay);
   }
 
   const getRandomIndex = () => {
@@ -42,7 +45,6 @@ function App() {
       return;
     }
     setSuccess(false);
-
     const nextLightIndex = getRandomIndex()
     turnOnLight(nextLightIndex);
     setSequence(oldSequence => [...oldSequence, nextLightIndex]);
@@ -54,50 +56,57 @@ function App() {
   const startGame = () => {
     setShowGameOver(false);
     setGameStarted(true);
+    setSpeed(1000);
+    setDelay(500);
     setUserSequence([]);
     setSequence([]);
     setLights(data);
+    setAllowReset(false);
     if (allowReset) {
       initialSequence(3);
     }
-    setAllowReset(false);
+    setClickDisabled(true)
     setTimeout(() => {
-      setAllowReset(true)
+      setAllowReset(true);
+      setClickDisabled(false);
     }, 3000);
   }
 
-  const getDelay = () => {
-    let delay = 500;
-    let speed = getSpeed();
-    if (speed === 600) delay = 300;
-    if (speed <= 400) delay = 200;
-    if (speed === 200) delay = 100;
-    if (speed <= 100) delay = 70;
-    return delay;
-  }
+  useEffect(() => {
+    if (sequence.length > 5) setSpeed(800);
+    if (sequence.length > 7) setSpeed(600);
+    if (sequence.length > 9) setSpeed(400);
+    if (sequence.length > 11) setSpeed(300);
+    if (sequence.length > 13) setSpeed(200);
+    if (sequence.length > 15) setSpeed(100);
+  }, [sequence.length]);
 
-  const getSpeed = () => {
-    let speed = 1000;
-    if (sequence.length > 5) speed = 800;
-    if (sequence.length > 7) speed = 600;
-    if (sequence.length > 9) speed = 400;
-    if (sequence.length > 11) speed = 300;
-    if (sequence.length > 13) speed = 200;
-    if (sequence.length > 15) speed = 100;
+  useEffect(() => {
+    userSequence.map((light, i) => {
+      if (light !== sequence[i]) handleFail();
+    })
+  }, [userSequence.length])
 
-    return speed;
-  }
+  useEffect(() => {
+    if (speed === 100) {
+      setDelay(70);
+    } else {
+      setDelay(speed/2);
+    }
+  }, [speed])
  
   const specificSequence = (sequence, index) => {
     turnOnLight(sequence[index]);
     setTimeout(() => {
       specificSequence(sequence, index + 1);
-    }, getSpeed())
+    }, speed)
   }
 
   const handleClick = (index) => {
-    turnOnLight(index);
-    setUserSequence(oldUserSequence => [...oldUserSequence, index]);
+    if (!clickDisabled) {
+      turnOnLight(index);
+      setUserSequence(oldUserSequence => [...oldUserSequence, index]);
+    }
   }
 
   const handleSuccess = () => {
@@ -105,9 +114,8 @@ function App() {
     setUserSequence([]);
     setSuccess(true);
   }
+
   const handleFail = () => {
-    setSequence([]);
-    setUserSequence([]);
     setShowGameOver(true);
     setGameStarted(false);
     const score = sequence.length -1;
@@ -120,7 +128,12 @@ function App() {
   useEffect(() => {
     if (success) {
       setTimeout(() => {
-        specificSequence(sequence, 0)
+        specificSequence(sequence, 0);
+        setClickDisabled(true);
+        let timeDisabled = speed * sequence.length;
+        setTimeout(() => {
+          setClickDisabled(false);
+        }, timeDisabled)
       }, 1000)
       setSuccess(false);
     }
@@ -128,7 +141,7 @@ function App() {
  
   useEffect(() => {
     if (sequence.length > 0 && userSequence.length === sequence.length) {
-      const isEqual = sequence.every((value, index) => value === userSequence[index]);
+      const isEqual = sequence.every((value, i) => value === userSequence[i]);
       if (isEqual) {
         handleSuccess();
       } else {
