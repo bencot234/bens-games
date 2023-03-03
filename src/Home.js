@@ -67,7 +67,7 @@ const Wrapper = styled.div`
 // OPENING ANIMATION
 .choose-your-game {
 	color: white;
-	font-size: 100px;
+	font-size: 70px;
 	font-weight: bold;
 	text-transform: capitalize;
 	animation-name: choose;
