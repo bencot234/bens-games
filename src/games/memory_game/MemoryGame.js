@@ -104,7 +104,7 @@ function App() {
 	
 	return (
 		<>
-			<Wrapper className='background'>
+			<Wrapper>
 				<main>
 					<div className='time-container'>
 						<div className='best-time'>best: {formatTime(topScore)}</div>

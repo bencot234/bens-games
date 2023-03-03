@@ -63,11 +63,10 @@ const Wrapper = styled.div`
 .wrapper {
 	postition: relative;
 }
-
 // OPENING ANIMATION
 .choose-your-game {
 	color: white;
-	font-size: 70px;
+	font-size: 50px;
 	font-weight: bold;
 	text-transform: capitalize;
 	animation-name: choose;
@@ -89,7 +88,7 @@ const Wrapper = styled.div`
 }
 .animation-container {
 	position: absolute;
-	top: 0;
+	top: 20px;
 }
 .title-center {
 	display: flex;
@@ -97,7 +96,6 @@ const Wrapper = styled.div`
 	margin: 0 auto;
 	width: 100vw;
 }
-
 @media (min-width: 900px) {
 	.choose-your-game {
 		font-size: 200px;
@@ -107,7 +105,6 @@ const Wrapper = styled.div`
 		display: flex;
 	}
 }
-
 // LINK
 .image-container {
 	width: 100vw;
@@ -139,7 +136,6 @@ const Wrapper = styled.div`
 		transform: translate(0, -10px);
 	}
 }
-
 // GAME NAME
 .name-sml-screen {
 	color: white;
@@ -156,8 +152,6 @@ const Wrapper = styled.div`
 	text-align: center;
 	margin: 0 auto;
 	position: absolute;
-	top: 0;
-	margin-top: 30px;
 }
 @media (min-width: 900px) {
 	.name {
@@ -167,14 +161,12 @@ const Wrapper = styled.div`
 		display: none;
 	}
 }
-
-
 // OVERALL CONTAINER
 .games-container {
 	display: flex;
 	flex-direction: column;
 	place-items: center;
-	margin-top: 10vh;
+	margin-top: 100px;
 }
 @media (min-width: 900px) {
 	.games-container {
@@ -182,7 +174,7 @@ const Wrapper = styled.div`
 		gap: 20px;
 		flex-direction: row;
 		justify-content: center;
-		margin-top: 20vh;
+		margin-top: 200px;
 	}
 }
 `
