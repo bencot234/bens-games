@@ -19,7 +19,7 @@ const Die = ({id, value, selected}) => {
 			onClick={() => selectDie(id)}
 		>
 			<p className='dice-number'>{displayValue(value)}</p>
-		</button>;
+		</button>
 	</Wrapper>
 }
 

@@ -1,15 +1,21 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import games from './data';
 
 function Home() {
+	const [viewNames, setViewNames] = useState(false);
+	const [viewAnimation, setViewAnimation] = useState(true);
 	const setBackground = (color) => {
 		document.body.style.background = color;
 	}
 
 	useEffect(() => {
-		setBackground('black')
+		setBackground('black');
+		setTimeout(() => {
+			setViewNames(true);
+			setViewAnimation(false);
+		}, 3500);
 	}, [])
 
 	const showName = (name) => {
@@ -33,25 +39,22 @@ function Home() {
 							className={`link animate__animated animate__fadeIn animate__delay-${delay}`}
 						>
 							<div className='image-container'>
-									<img src={image} alt={name} className='image'/>
+								<img src={image} alt={name} className='image'/>
 							</div>
 							<p className='name-sml-screen'>{name}</p>
-					</Link>
-				</div>
+						</Link>
+					</div>
 				})}
 			</div>
 			<div className='animation-container'>
 				<div className='title-center'>
-					<div id='name' className='name'></div>
+					<div id='name' className={`${viewNames ? 'name' : 'hide'}`}></div>
 					<div className='choose-your-game'>choose</div>
 					<div className='choose-your-game your'>your</div>
 					<div className='choose-your-game game'>game</div>
-
 				</div>
-				{/* <div className='game-name-hover'>{game}</div> */}
 			</div>
 		</Wrapper>
-
 	);
 }
 
@@ -63,21 +66,21 @@ const Wrapper = styled.div`
 
 // OPENING ANIMATION
 .choose-your-game {
-		color: white;
-		font-size: 100px;
-		font-weight: bold;
-		text-transform: capitalize;
-		animation-name: choose;
-		animation-duration: 1s;
-		visibility: hidden;
+	color: white;
+	font-size: 100px;
+	font-weight: bold;
+	text-transform: capitalize;
+	animation-name: choose;
+	animation-duration: 1s;
+	visibility: hidden;
 }
 .your {
-		animation-delay: 1s;
-		position: absolute;
+	animation-delay: 1s;
+	position: absolute;
 }
 .game {
-		animation-delay: 2s;
-		position: absolute;
+	animation-delay: 2s;
+	position: absolute;
 }
 @keyframes choose {
 	0% {visibility: hidden;}
@@ -97,11 +100,11 @@ const Wrapper = styled.div`
 
 @media (min-width: 900px) {
 	.choose-your-game {
-			font-size: 200px;
+		font-size: 200px;
 	}
 	.animation-container {
-			position: relative;
-			display: flex;
+		position: relative;
+		display: flex;
 	}
 }
 
@@ -175,11 +178,11 @@ const Wrapper = styled.div`
 }
 @media (min-width: 900px) {
 	.games-container {
-			display: flex;
-			gap: 20px;
-			flex-direction: row;
-			justify-content: center;
-			margin-top: 20vh;
+		display: flex;
+		gap: 20px;
+		flex-direction: row;
+		justify-content: center;
+		margin-top: 20vh;
 	}
 }
 `

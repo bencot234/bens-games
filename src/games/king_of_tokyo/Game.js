@@ -9,6 +9,7 @@ import Modal from './Modal';
 import YieldModal from './YieldModal';
 import YieldTokyoCityModal from './YieldTokyoCityModal';
 import YieldTokyoBayModal from './YieldTokyoBayModal';
+import BackToGamesBtn from '../../BackToGamesBtn';
 
 function Game() {
 	const { 
@@ -67,6 +68,7 @@ function Game() {
 					</div>
 				</Wrapper>
 			</div>}
+			<BackToGamesBtn/>
 		</main>
 	);
 }

@@ -20,6 +20,7 @@ function App() {
   const [showGameOver, setShowGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const [best, setBest] = useState(getBest());
+  const [allowReset, setAllowReset] = useState(true);
 
   const turnOnLight = (index) => {
     const newLights = [...lights];
@@ -51,12 +52,18 @@ function App() {
   }
 
   const startGame = () => {
-    setLights(data);
     setShowGameOver(false);
     setGameStarted(true);
     setUserSequence([]);
     setSequence([]);
-    initialSequence(3);
+    setLights(data);
+    if (allowReset) {
+      initialSequence(3);
+    }
+    setAllowReset(false);
+    setTimeout(() => {
+      setAllowReset(true)
+    }, 3000);
   }
 
   const getDelay = () => {
@@ -214,7 +221,7 @@ const Wrapper = styled.div`
 }
 .start-btn:hover {
   transition: 0.5s;
-  border: 3px solid black;
+  // border: 3px solid black;
   letter-spacing: 0;
   padding-left: 15px;
 }

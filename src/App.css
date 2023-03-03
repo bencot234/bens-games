@@ -25,3 +25,7 @@
     color: cornflowerblue;
     transition: 0.5s;
 }
+
+.hide {
+    display: none;
+}
