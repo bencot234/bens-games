@@ -1,17 +1,17 @@
 import React, {useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import logo from './images/logo.jpg'
-import 'animate.css';
+import 'animate.css'
 import styled from 'styled-components'
 
 const Intro = () => {
-		const navigate = useNavigate();
+	const navigate = useNavigate();
 
-		useEffect(() => {
-				setTimeout(() => {
-						navigate('/king-of-tokyo/game')
-				}, 7000)
-		}, [])
+	useEffect(() => {
+		setTimeout(() => {
+			navigate('/king-of-tokyo/game')
+		}, 7000)
+	}, [])
 
 	return (
 		<Wrapper>

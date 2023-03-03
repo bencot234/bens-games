@@ -4,8 +4,6 @@ import Home from './Home';
 import Intro from './games/king_of_tokyo/Intro';
 import Game from './games/king_of_tokyo/Game';
 import HigherOrLower from './games/higher_or_lower/HigherOrLower';
-import MemoryGame from './games/memory_game/MemoryGame';
-import { GameProvider } from './games/memory_game/context';
 import { AppProvider } from './games/king_of_tokyo/context';
 import Sequencer from './games/sequencer/Sequencer';
 
@@ -21,11 +19,6 @@ function App() {
             </AppProvider>
           }/>
           <Route path='/higher-or-lower' element={<HigherOrLower/>}/>
-          <Route path='/memory-game' element={
-            <GameProvider>
-              <MemoryGame/>
-            </GameProvider>
-          }/>
           <Route path='/sequencer' element={<Sequencer/>}/>
         </Routes>
       </Router>

@@ -1,24 +1,35 @@
 import { useGlobalContext } from "./context";
 import styled from 'styled-components';
 
-const Modal = () => {
-	const { modalMessage, closeModal, playAgain, gameOver } = useGlobalContext();
+const YieldTokyoCityModal = () => {
+	const { 
+		handleYieldTokyoCity,
+		tokyoCityPlayer,
+		hideYieldTokyoCityModal,
+	} = useGlobalContext();
 
-	const resetGame = () => {
-		closeModal();
-		playAgain();
+	const handleYield = () => {
+		hideYieldTokyoCityModal();
+		handleYieldTokyoCity();
 	}
+
 	return <Wrapper>
 		<div className="winner-container">
-			<p>{modalMessage}</p>
-			{!gameOver && <button className="btn" onClick={closeModal}>Close</button>}
-			{gameOver && <button className="btn submit-btn" onClick={resetGame}>Play Again?</button>}
+			<p>{`${tokyoCityPlayer.name}, do you yield?`}</p>
+			<button className="btn submit-btn" onClick={handleYield}>Yes</button>
+			<button className="btn submit-btn" onClick={hideYieldTokyoCityModal}>No</button>
 		</div>
 	</Wrapper>
 }
 
 const Wrapper = styled.div`
 .winner-container {
+	font-size: 2rem;
+	font-weight: bold;
+	padding: 3rem 4rem;
+	border: solid 2px rgb(153, 222, 51);
+	background-color: #fcfcf0;
+	text-align: center;
 	position: absolute;
 	z-index: 1;
 	top: 20rem;
@@ -26,12 +37,6 @@ const Wrapper = styled.div`
 	transform: translate(-50%, -50%);
 	background: white;
 	border-radius: 1rem;
-	font-size: 2rem;
-	font-weight: bold;
-	padding: 3rem 4rem;
-	border: solid 2px rgb(153, 222, 51);
-	background-color: #fcfcf0;
-	text-align: center;
 }
 .btn {
 	border: 1px solid black;
@@ -57,4 +62,4 @@ const Wrapper = styled.div`
 }
 `
 
-export default Modal;
+export default YieldTokyoCityModal;

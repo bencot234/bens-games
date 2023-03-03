@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Die = ({id, value, selected}) => {
 	const { selectDie, numRolls } = useGlobalContext();
-
+ 
 	const displayValue = (value) => {
 		if (value === 4) value = <AiFillHeart/>
 		if (value === 5) value = <FaPaw/>
@@ -15,11 +15,11 @@ const Die = ({id, value, selected}) => {
 	return <Wrapper>
 		<button
 			disabled={numRolls === 3}
-			className={`dice  ${selected ? 'die-selected' : ''}`}
+			className={`dice ${selected ? 'die-selected' : ''}`}
 			onClick={() => selectDie(id)}
 		>
 			<p className='dice-number'>{displayValue(value)}</p>
-		</button>
+		</button>;
 	</Wrapper>
 }
 

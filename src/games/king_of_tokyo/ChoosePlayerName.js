@@ -9,7 +9,7 @@ import bunny from './images/CyberBunny.jpeg';
 import alienoid from './images/Alienoid.jpeg';
 
 const ChoosePlayerName = ({playerID, setPlayerID, setShowForms}) => {
-	const nameInput = useRef(null);
+	const nameInput = useRef();
 	const {setInitialPlayers, players, setShowGame} = useGlobalContext();
 	const [name, setName] = useState('');
 	const [monsters, setMonsters] = useState([
@@ -50,12 +50,10 @@ const ChoosePlayerName = ({playerID, setPlayerID, setShowForms}) => {
 			selected: false,
 		},
 	]);
-
-	useEffect(() => {
-		if (nameInput.current) {
-			nameInput.current.focus();
-		}
-	}, [])
+	
+	if (nameInput.current) {
+		nameInput.current.focus();
+	}
 
 	const handleSubmit = (e) => {
         e.preventDefault();
@@ -117,6 +115,7 @@ const ChoosePlayerName = ({playerID, setPlayerID, setShowForms}) => {
 						<input 
 							type="text"
 							ref={nameInput}
+							name={name}
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							placeholder={`Player ${playerID}`}
@@ -163,14 +162,14 @@ input {
 	font-size: 1rem;
 	padding-left: 0.5rem;
 }
-.choose-player-name-container, .select-num-players, .yield-question-container {
+.choose-player-name-container {
 	text-align: center;
 	background-color: #fcfcf0;
 	border: solid 2px rgb(153, 222, 51);
 	color: black;
 	padding: 1rem 2rem;
 	border-radius: 1rem;
-	width: 90vw;
+	width: 80vw;
 }
 .thumb-container {
 	width: 50px;
@@ -206,15 +205,11 @@ input {
 .alienoid-thumb {
 	left: -80px;
 }
-@media (min-width: 1150px) {
-	.choose-player-name-container,
-	.select-num-players,
-	.yield-question-container {
-		width: 30rem;
+@media (min-width: 700px) {
+	.choose-player-name-container {
+		width: 500px;
 	}
 }
 `
-
-
 
 export default ChoosePlayerName;

@@ -14,6 +14,7 @@ const initialState = {
 	],
 	numRolls: 3,
 	players: [],
+	playersReloaded: [],
 	currentPlayerIndex: 0,
 	diceResults: {
 		points: 0,
@@ -22,77 +23,27 @@ const initialState = {
 	},
 	showModal: false,
 	showYieldModal: false,
+	showYieldTokyoCityModal: false,
+	showYieldTokyoBayModal: false,
 	modalMessage: '',
 	tokyoOccupied: false,
+	tokyoCityOccupied: false,
+	tokyoBayOccupied: false,
 	indexOfEliminated: null,
+	indexOfEliminateds: [],
 	showGame: false,
 	playerInTokyoName: '',
+	extraRules: false,
+	gameOver: false,
+	tokyoCityPlayer: null,
+	tokyoBayPlayer: null,
+	playersInTokyo: 0,
+	tokyoCityYielded: false,
 };
 
 const AppProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
  
-    const setPlayerName = () => {
-		dispatch({type: 'SET_PLAYER_IN_TOKYO_NAME'})
-    }
-
-	const deselectDice = () => {
-		dispatch({type: 'DESELECT_DICE'})
-	}
-
-    const rollDice = () => {
-		dispatch({type: 'ROLL_DICE'});
-		dispatch({type: 'REDUCE_ROLLS_LEFT'});
-	}
-
-	const selectDie = (id) => {
-		dispatch({type: 'SELECT_DIE', payload: id});
-	}
-
-	const setNextPlayer = () => {
-		dispatch({type: 'SET_NEXT_PLAYER'});
-	}
-
-	const resetNumRolls = () => {
-		dispatch({type: 'RESET_NUM_ROLLS'});
-	}
-
-	const setDiceResults = () => {
-		dispatch({type: 'SET_DICE_RESULTS'});
-	}
-
-	// WIN CONDITIONS
-	useEffect(() => {
-		if (state.players.length === 1) {
-			const name = state.players.find(player => player).name;
-			dispatch({type: 'SHOW_MODAL', payload: {message: `${name} is the winner!`, index: 0, winner: true}});
-		}
-		state.players.map((player, i) => {
-			if (player.points >= 20) {
-				dispatch({type: 'SHOW_MODAL', payload: {message: `${player.name} is the winner!`, index: i}});
-			}
-		});
-	}, [state.players]);
-
-	const currentPlayer = () => {
-		return state.players.find((player, i) => i === state.currentPlayerIndex);
-	}
-
-	const setInitialPlayers = (initialPlayers) => {
-		dispatch({type: 'SET_INITIAL_PLAYERS', payload: initialPlayers})
-	}
-
-	const updatePlayers = () => {
-		const currentPlayer = state.players.find((player, i) => i === state.currentPlayerIndex);
-		if (currentPlayer.inTokyo) {
-			dispatch({type: 'UPDATE_PLAYERS__CURRENT_PLAYER_IN_TOKYO'})
-		} else {
-			dispatch({type: 'UPDATE_PLAYERS__CURRENT_PLAYER_OUT_TOKYO'})
-		}
-
-		dispatch({type: 'UPDATE_PLAYERS'});
-	}
-
 	const checkEliminated = () => {
 		dispatch({type: 'CHECK_ELIMINATED'})
 	}
@@ -101,22 +52,105 @@ const AppProvider = ({ children }) => {
 		dispatch({type: 'CLOSE_MODAL'});
 	}
 
-	const hideYieldModal = () => {
-		
-		dispatch({type: 'HIDE_YIELD_MODAL'});
+	const currentPlayer = () => {
+		return state.players.find((player, i) => i === state.currentPlayerIndex);
 	}
 
+	const deselectDice = () => {
+		dispatch({type: 'DESELECT_DICE'})
+	}
+	
 	const handleYield = () => {
 		dispatch({type: 'HANDLE_YIELD'});
 	}
 
-	const setShowGame = () => {
-		dispatch({type: 'SET_SHOW_GAME'});
+	const handleYieldTokyoCity = () => {
+		dispatch({type: 'HANDLE_YIELD_TOKYO_CITY'});
+	}
+
+	const handleYieldTokyoBay = () => {
+		dispatch({type: 'HANDLE_YIELD_TOKYO_BAY'});
+	}
+
+	const hideYieldModal = () => {
+		dispatch({type: 'HIDE_YIELD_MODAL'});
+	}
+	const hideYieldTokyoCityModal = () => {
+		dispatch({type: 'HIDE_YIELD_TOKYO_CITY_MODAL'});
+	}
+	const hideYieldTokyoBayModal = () => {
+		dispatch({type: 'HIDE_YIELD_TOKYO_BAY_MODAL'});
 	}
 
 	const playAgain = () => {
 		dispatch({type: 'PLAY_AGAIN'});
 	}
+
+	const resetNumRolls = () => {
+		dispatch({type: 'RESET_NUM_ROLLS'});
+	}
+
+	const rollDice = () => {
+		dispatch({type: 'ROLL_DICE'});
+		dispatch({type: 'REDUCE_ROLLS_LEFT'});
+	}
+	
+	const selectDie = (id) => {
+		dispatch({type: 'SELECT_DIE', payload: id});
+	}
+
+	const setDiceResults = () => {
+		dispatch({type: 'SET_DICE_RESULTS'});
+	}
+
+	const setExtraRules = (extraRules) => {
+		dispatch({type: 'SET_EXTRA_RULES', payload: extraRules});
+	}
+
+	const setInitialPlayers = (initialPlayers) => {
+		dispatch({type: 'SET_INITIAL_PLAYERS', payload: initialPlayers})
+	}
+
+	const setNextPlayer = () => {
+		dispatch({type: 'SET_NEXT_PLAYER'});
+	}
+
+    const setPlayerName = () => {
+		dispatch({type: 'SET_PLAYER_IN_TOKYO_NAME'})
+    }
+
+	const setShowGame = () => {
+		dispatch({type: 'SHOW_GAME'});
+	}
+	const setTokyoCityYielded = () => {
+		dispatch({type: 'SET_TOKYO_CITY_YIELDED'});
+	}
+   
+	const updatePlayers = () => {
+		const currentPlayer = state.players.find((player, i) => i === state.currentPlayerIndex);
+		if (state.extraRules) {
+			dispatch({type: 'UPDATE_PLAYERS__EXTRA_RULES', payload: currentPlayer})
+		} else {
+			if (currentPlayer.inTokyo) {
+				dispatch({type: 'UPDATE_PLAYERS__CURRENT_PLAYER_IN_TOKYO'})
+			} else {
+				dispatch({type: 'UPDATE_PLAYERS__CURRENT_PLAYER_OUT_TOKYO'})
+			}
+		}
+	}
+
+	// WIN CONDITIONS
+	useEffect(() => {
+		if (state.players.length === 1) {
+			const name = state.players.find(player => player).name;
+			dispatch({type: 'SHOW_MODAL', payload: {message: `${name} is the winner!`, index: 0, gameOver: true}});
+		}
+		state.players.map((player, i) => {
+			if (player.points >= 20) {
+				dispatch({type: 'SHOW_MODAL', payload: {message: `${player.name} is the winner!`, index: i, gameOver: true}});
+			}
+		});
+	}, [state.players]);
 
     return (
         <AppContext.Provider
@@ -138,6 +172,12 @@ const AppProvider = ({ children }) => {
 				setInitialPlayers,
 				setShowGame,
 				playAgain,
+				setExtraRules,
+				handleYieldTokyoCity,
+				handleYieldTokyoBay,
+				hideYieldTokyoCityModal,
+				hideYieldTokyoBayModal,
+				setTokyoCityYielded,
             }}
         >
             {children}

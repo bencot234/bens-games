@@ -2,10 +2,10 @@ import { FaStar } from 'react-icons/fa';
 import { AiFillHeart } from 'react-icons/ai';
 import styled from 'styled-components';
 
-const Player = ({name, points, health, inTokyo, isTurn, monster}) => {
+const Player = ({name, points, health, inTokyo, isTurn, monster, inTokyoCity, inTokyoBay}) => {
 	return (
 		<Wrapper>
-			<div className={`${isTurn ? 'animate__animated animate__pulse' : inTokyo ? 'player-in-tokyo' : ''} image-container`}>
+			<div className={`${isTurn ? 'animate__animated animate__pulse' : ''} ${inTokyo || inTokyoCity ? 'player-in-tokyo' : inTokyoBay ? 'in-tokyo-bay' : ''} image-container`}>
 				<img className={`${monster.name}-image image ${isTurn ? 'selected-image' : ''}`} src={monster.image} alt={monster.name} />
 				<div className={`player-container ${isTurn ? 'player-is-turn' : ''}`}>
 					<h2>{name}</h2>
@@ -99,6 +99,12 @@ const Wrapper = styled.div`
 .player-in-tokyo h2 {
 	color: red;
 }
+.in-tokyo-bay {
+	border: solid 2px rgb(88, 47, 254);
+}
+.in-tokyo-bay h2 {
+	color: rgb(88, 47, 254);
+}
 .image {
 	width: 320px;
 	height: auto;
@@ -106,7 +112,6 @@ const Wrapper = styled.div`
 	top: -10px;
 	left: -220px;
 	object-fit: cover;
-	// border-radius: 50%;
 	opacity: 60%;
 }
 .player-is-turn {

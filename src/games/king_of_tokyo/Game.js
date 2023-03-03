@@ -7,7 +7,8 @@ import { useGlobalContext } from './context';
 import board from './images/king-of-tokyo-board.jpeg';
 import Modal from './Modal';
 import YieldModal from './YieldModal';
-import BackToGamesBtn from '../../BackToGamesBtn';
+import YieldTokyoCityModal from './YieldTokyoCityModal';
+import YieldTokyoBayModal from './YieldTokyoBayModal';
 
 function Game() {
 	const { 
@@ -22,12 +23,15 @@ function Game() {
 		checkEliminated,
 		showModal,
 		showYieldModal,
+		showYieldTokyoCityModal,
+		showYieldTokyoBayModal,
 		setPlayerName,
 		showGame,
+		setTokyoCityYielded,
 	} = useGlobalContext();
 
-
 	const handleSubmit = () => {
+		setTokyoCityYielded();
 		setDiceResults();
 		updatePlayers();
 		checkEliminated();
@@ -37,34 +41,33 @@ function Game() {
 	}
 
 	return (
-		<>
-			<main>
-				<SelectPlayers/>
-				{showGame && <div>
-					<Dice/>
-					{showModal && <Modal/>}
-					{showYieldModal && <YieldModal/>}
-					<Wrapper>
-						<div className='btn-container'>
-							<button onClick={rollDice} className='btn general-btn' disabled={numRolls === 0}>Roll Dice</button>
-							<button className='btn submit-btn' disabled={numRolls === 3} onClick={handleSubmit}>Submit</button>
+		<main>
+			<SelectPlayers/>
+			{showGame && <div>
+				<Dice/>
+				{showYieldModal && <YieldModal/>}
+				{showYieldTokyoBayModal && <YieldTokyoBayModal/>}
+				{showYieldTokyoCityModal && <YieldTokyoCityModal/>}
+				{showModal && <Modal/>}
+				<Wrapper>
+					<div className='btn-container'>
+						<button onClick={rollDice} className='btn general-btn' disabled={numRolls === 0}>Roll Dice</button>
+						<button className='btn submit-btn' disabled={numRolls === 3} onClick={handleSubmit}>Submit</button>
+					</div>
+					<div className="relative board-players-container">
+						<div className='players-container'>
+							{players.map((player, i) => {
+								player.isTurn = i === currentPlayerIndex;
+								return <Player key={player.id} {...player}/>
+							})}
 						</div>
-						<div className="relative board-players-container">
-							<div className='players-container'>
-								{players.map((player, i) => {
-									player.isTurn = i === currentPlayerIndex;
-									return <Player key={player.id} {...player}/>
-								})}
-							</div>
-							<div className="board">
-								<img className="board-image" src={board} alt="king of tokyo board" />
-							</div>
+						<div className={`${players.length >= 5 ? 'board-extra board' : 'board'}`}>
+							<img className="board-image" src={board} alt="king of tokyo board" />
 						</div>
-					</Wrapper>
-				</div>}
-			</main>
-			<BackToGamesBtn/>
-		</>
+					</div>
+				</Wrapper>
+			</div>}
+		</main>
 	);
 }
 
@@ -87,6 +90,9 @@ const Wrapper = styled.section`
 	margin-left: -100px;
 	width: 200px;
 	z-index: -1;
+}
+.board-extra {
+	top: 23.5rem;
 }
 .btn {
 	border: 1px solid black;
@@ -146,6 +152,5 @@ const Wrapper = styled.section`
 	}
 }
 `
-
 
 export default Game;
