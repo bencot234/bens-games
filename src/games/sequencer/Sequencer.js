@@ -27,11 +27,11 @@ function App() {
 
   const turnOnLight = (index) => {
     const newLights = [...lights];
-    newLights[index].on = true;
+    if (index) newLights[index].on = true;
     setLights(newLights);
     setTimeout(() => {
       const newerLights = [...lights];
-      newerLights[index].on = false;
+      if (index) newerLights[index].on = false;
       setLights(newerLights)
     }, delay);
   }
@@ -69,7 +69,7 @@ function App() {
     setTimeout(() => {
       setAllowReset(true);
       setClickDisabled(false);
-    }, 3000);
+    }, 2500);
   }
 
   useEffect(() => {
@@ -130,7 +130,7 @@ function App() {
       setTimeout(() => {
         specificSequence(sequence, 0);
         setClickDisabled(true);
-        let timeDisabled = speed * sequence.length;
+        let timeDisabled = (speed * sequence.length) - delay;
         setTimeout(() => {
           setClickDisabled(false);
         }, timeDisabled)
