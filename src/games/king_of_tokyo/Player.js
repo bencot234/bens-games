@@ -38,12 +38,12 @@ const Wrapper = styled.div`
 .in-tokyo {
 	position: absolute;
 	background-color: white;
-	top: -5px;
-	left: 48px;
+	top: 0px;
+	left: 20px;
 	font-weight: bold;
 	text-transform: uppercase;
-	font-size: small;
-	padding: 10px;
+	font-size: 7px;
+	padding: 5px;
 	padding-bottom: 5px;
 	border-radius: 50%;
 	color: #bbb;
@@ -182,6 +182,13 @@ const Wrapper = styled.div`
 	width: 650px;
 }
 @media (min-width: 1150px) {
+	.in-tokyo {
+		top: -5px;
+		left: 48px;
+		font-size: small;
+		padding: 10px;
+		padding-bottom: 5px;
+	}
 	.image {
 		width: 500px;
 		top: -10px;
