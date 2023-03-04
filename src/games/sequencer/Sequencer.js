@@ -175,7 +175,7 @@ function App() {
 					})}
 					<button className='start-btn' onClick={() => startGame()}>{gameStarted ? 'Retry' : 'Start'}</button>
 				</div>
-				{best && <div className='best'>best: {best}</div>}
+				{best > 0 && <div className='best'>best: {best}</div>}
 			</Wrapper>
 			<BackToGamesBtn/>
 		</>
