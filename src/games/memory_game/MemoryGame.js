@@ -72,10 +72,10 @@ function App() {
 	const gameDifficulty = (difficulty) => {
 		setDifficulty(difficulty)
 		if (difficulty === 'easy') {
-			shuffleCards(6);
+			shuffleCards(8);
 		}
 		if (difficulty === 'medium') {
-			shuffleCards(10);
+			shuffleCards(12);
 		}
 		if (difficulty === 'hard') {
 			shuffleCards(20);

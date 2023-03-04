@@ -119,9 +119,9 @@ const Wrapper = styled.div`
   }
   .card-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 50px;
-    width: 800px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    width: 570px;
   }
 }
 `
