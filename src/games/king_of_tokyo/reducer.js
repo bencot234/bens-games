@@ -583,6 +583,7 @@ const reducer = (state, action) => {
 			} = state;
 			let showYieldTokyoCityModal = false;
 			let showYieldTokyoBayModal = false;
+			let showYieldModal = false;
 			
 			// UPDATE HEALTH
 			let newHealth = currentPlayer.health + diceResults.healthGained;
@@ -604,9 +605,17 @@ const reducer = (state, action) => {
 					if (tokyoBayPlayer.health - diceResults.damageDealt > 0) {
 						showYieldTokyoBayModal = true;
 					}
-				} else {
+				} 
+				if (players.length === 6) {
 					if (tokyoBayPlayer.health - diceResults.damageDealt > 0) {
 						showYieldTokyoCityModal = true;
+					}
+				} 
+				if (players.length === 5) {
+					if (tokyoCityPlayer.health - diceResults.damageDealt <= 0) {
+						if (tokyoBayPlayer.health - diceResults.damageDealt > 0) {
+							showYieldModal = true;
+						}
 					}
 				}
 			}
@@ -628,6 +637,7 @@ const reducer = (state, action) => {
 				players: updatedPlayers,
 				showYieldTokyoCityModal: showYieldTokyoCityModal,
 				showYieldTokyoBayModal: showYieldTokyoBayModal,
+				showYieldModal: showYieldModal,
 			}
 		} 
 	}
