@@ -52,18 +52,18 @@ function App() {
 	}
 
 	const startGame = () => {
-		setTitle('Sequencer');
-		setGameStarted(true);
-		setSpeed(1000);
-		setDelay(500);
-		setUserSequence([]);
-		setSequence([]);
-		setLights(data);
-		setAllowReset(false);
 		if (allowReset) {
+			setTitle('Sequencer');
+			setGameStarted(true);
+			setSpeed(1000);
+			setDelay(500);
+			setUserSequence([]);
+			setSequence([]);
+			setLights(data);
+			setAllowReset(false);
 			initialSequence(3);
+			setClickDisabled(true)
 		}
-		setClickDisabled(true)
 		setTimeout(() => {
 			setAllowReset(true);
 			setClickDisabled(false);
