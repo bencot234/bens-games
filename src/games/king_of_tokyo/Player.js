@@ -38,13 +38,13 @@ const Wrapper = styled.div`
 .in-tokyo {
 	position: absolute;
 	background-color: white;
-	top: -5px;
-	left: 20px;
+	top: -4px;
+	left: 21px;
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 7px;
 	padding: 5px;
-	padding-bottom: 5px;
+	padding-bottom: 3px;
 	border-radius: 50%;
 	color: #bbb;
 }
