@@ -175,10 +175,10 @@ function App() {
 						const {id, on, color} = light;
 						return <div
 							key={id}
-							tabIndex={index}
+							tabIndex={id}
 							className={`light ${on ? color : ''}`}
 							onClick={() => handleClick(index)}
-							onKeyDown={(e) => handleKeyDown(e, index)}
+							onKeyDown={(e) => handleKeyDown(e, id)}
 						></div>
 					})}
 					<button className='start-btn' onClick={() => startGame()}>{gameStarted ? 'Retry' : 'Start'}</button>
