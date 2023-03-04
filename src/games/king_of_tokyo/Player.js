@@ -38,7 +38,7 @@ const Wrapper = styled.div`
 .in-tokyo {
 	position: absolute;
 	background-color: white;
-	top: 0px;
+	top: -5px;
 	left: 20px;
 	font-weight: bold;
 	text-transform: uppercase;
