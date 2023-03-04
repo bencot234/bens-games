@@ -128,6 +128,12 @@ function App() {
 		gameOver('fail')
 	}
 
+	const handleKeyDown = (e, index) => {
+		if (e.key === 'Enter') {
+			handleClick(index);
+		}
+	}
+
 	useEffect(() => {
 		if (success) {
 			setTimeout(() => {
@@ -169,8 +175,10 @@ function App() {
 						const {id, on, color} = light;
 						return <div
 							key={id}
+							tabIndex={index}
 							className={`light ${on ? color : ''}`}
 							onClick={() => handleClick(index)}
+							onKeyDown={(e) => handleKeyDown(e, index)}
 						></div>
 					})}
 					<button className='start-btn' onClick={() => startGame()}>{gameStarted ? 'Retry' : 'Start'}</button>
