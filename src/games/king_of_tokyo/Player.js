@@ -1,10 +1,11 @@
 import { FaStar } from 'react-icons/fa';
 import { AiFillHeart } from 'react-icons/ai';
 import styled from 'styled-components';
+import 'animate.css';
 
 const Player = ({name, points, health, inTokyo, isTurn, monster, inTokyoCity, inTokyoBay}) => {
 	return (
-		<Wrapper>
+		<Wrapper className='wrapper'>
 			<div className={`${isTurn ? 'animate__animated animate__pulse' : ''} ${inTokyo || inTokyoCity ? 'player-in-tokyo' : inTokyoBay ? 'in-tokyo-bay' : ''} image-container`}>
 				<img className={`${monster.name}-image image ${isTurn ? 'selected-image' : ''}`} src={monster.image} alt={monster.name} />
 				<div className={`player-container ${isTurn ? 'player-is-turn' : ''}`}>
@@ -20,12 +21,44 @@ const Player = ({name, points, health, inTokyo, isTurn, monster, inTokyoCity, in
 						</p>
 					</div>
 				</div>
+				<div className={`${inTokyo || inTokyoCity ? 'in-tokyo in-city' : 'hide'} ${isTurn ? 'in-tokyo-text' : ''}`}>tokyo city</div>
+				<div className={`${inTokyoBay ? 'in-tokyo in-bay' : 'hide'} ${isTurn ? 'in-tokyo-text' : ''}`}>tokyo bay</div>
 			</div>
 		</Wrapper>
 	);
 }
 
 const Wrapper = styled.div`
+.wrapper {
+	position: relative;
+}
+.hide {
+	display: none;
+}
+.in-tokyo {
+	position: absolute;
+	background-color: white;
+	top: -5px;
+	left: 48px;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: small;
+	padding: 10px;
+	padding-bottom: 5px;
+	border-radius: 50%;
+	color: #bbb;
+}
+.in-city {
+	background-color: red;
+	border: 3px solid red;
+}
+.in-bay {
+	background-color: blue;
+	border: 3px solid blue;
+}
+.in-tokyo-text {
+	color: white;
+}
 .player-container {
 	margin: 10px;
 	border-radius: 10px;
