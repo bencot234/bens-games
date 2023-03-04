@@ -5,7 +5,6 @@ import games from './data';
 
 function Home() {
 	const [viewNames, setViewNames] = useState(false);
-	const [viewAnimation, setViewAnimation] = useState(true);
 	const setBackground = (color) => {
 		document.body.style.background = color;
 	}
@@ -14,7 +13,6 @@ function Home() {
 		setBackground('black');
 		setTimeout(() => {
 			setViewNames(true);
-			setViewAnimation(false);
 		}, 3500);
 	}, [])
 
@@ -96,7 +94,7 @@ const Wrapper = styled.div`
 	margin: 0 auto;
 	width: 100vw;
 }
-@media (min-width: 900px) {
+@media (min-width: 1040px) {
 	.choose-your-game {
 		font-size: 200px;
 	}
@@ -127,13 +125,21 @@ const Wrapper = styled.div`
 	transition: 0.5s;
 	overflow: hidden;
 }
-@media (min-width: 900px) {
+@media (min-width: 1040px) {
 	.image-container {
 		width: 200px;
 		height: 200px;
 	}
 	.link-container:hover {
-		transform: translate(0, -10px);
+		transform: rotate(3deg);
+		transition: 1s;
+		filter: grayscale(0%);
+	}
+	.link-container {
+		filter: grayscale(100%);
+		border: 10px solid white;
+		border-bottom: 20px solid white;
+		margin: 10px;
 	}
 }
 // GAME NAME
@@ -153,7 +159,7 @@ const Wrapper = styled.div`
 	margin: 0 auto;
 	position: absolute;
 }
-@media (min-width: 900px) {
+@media (min-width: 1040px) {
 	.name {
 		font-size: 200px;
 	}
@@ -168,7 +174,7 @@ const Wrapper = styled.div`
 	place-items: center;
 	margin-top: 100px;
 }
-@media (min-width: 900px) {
+@media (min-width: 1040px) {
 	.games-container {
 		display: flex;
 		gap: 20px;
