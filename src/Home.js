@@ -30,18 +30,18 @@ function Home() {
 			<div className='games-container'>
 				{games.map(game => {
 					const {id, name, link, image, background, delay} = game;
-					return <div className='link-container' key={id} onMouseOver={() => showName(name)} onMouseOut={() => hideName(name)}>
-						<Link 
+					return <Link 
 							to={link} 
 							onClick={() => setBackground(background)} 
 							className={`link animate__animated animate__fadeIn animate__delay-${delay}`}
+							key={id} onMouseOver={() => showName(name)} onMouseOut={() => hideName(name)}
 						>
 							<div className='image-container'>
 								<img src={image} alt={name} className='image'/>
 							</div>
 							<p className='name-sml-screen'>{name}</p>
 						</Link>
-					</div>
+				
 				})}
 			</div>
 			<div className='animation-container'>
@@ -115,8 +115,6 @@ const Wrapper = styled.div`
 }
 .link {
 	text-decoration: none;
-}
-.link-container {
 	text-align: center;
 	text-transform: capitalize;
 	font-size: small;
@@ -130,12 +128,12 @@ const Wrapper = styled.div`
 		width: 200px;
 		height: 200px;
 	}
-	.link-container:hover {
+	.link:hover {
 		transform: rotate(3deg);
 		transition: 1s;
 		filter: grayscale(0%);
 	}
-	.link-container {
+	.link {
 		filter: grayscale(100%);
 		border: 10px solid white;
 		border-bottom: 20px solid white;

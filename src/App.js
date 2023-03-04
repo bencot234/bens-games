@@ -14,8 +14,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}/>
-          <Route path='/king-of-tokyo' element={<Intro/>}/>
-          <Route path="/king-of-tokyo/game" element={
+          {/* <Route path='/king-of-tokyo' element={<Intro/>}/> */}
+          <Route path="/king-of-tokyo" element={
             <AppProvider>
               <Game/>
             </AppProvider>
