@@ -19,7 +19,7 @@ const SelectPlayers = () => {
 				id: i,
 				name: 'player '+i,
 				points: 0,
-				health: 3,
+				health: 10,
 				inTokyo: false,
 				inTokyoCity: false,
 				inTokyoBay: false,
